@@ -1,4 +1,4 @@
--- creates tables
+
 CREATE TABLE weather_hourly (
     "index" BIGINT, 
     "DATE" DATETIME, 
@@ -14,8 +14,7 @@ CREATE TABLE weather_hourly (
     "Sunrise" TEXT, 
     "Sunset" TEXT, 
     "HourlyDryBulbTemperature" FLOAT
-);
-
+)
 
 CREATE TABLE weather_daily (
     "DATE" TEXT, 
@@ -27,7 +26,7 @@ CREATE TABLE weather_daily (
     "DailyDryBulbTemperature" FLOAT, 
     "LATITUDE" TEXT, 
     "LONGITUDE" TEXT
-);
+)
 
 CREATE TABLE taxi_data (
     "index" BIGINT, 
@@ -41,7 +40,7 @@ CREATE TABLE taxi_data (
     dropoff_latitude FLOAT, 
     fare_amount FLOAT, 
     tip_amount FLOAT
-);
+)
 
 CREATE TABLE uber_data (
     "index" BIGINT, 
@@ -54,6 +53,12 @@ CREATE TABLE uber_data (
     dropoff_longitude FLOAT, 
     dropoff_latitude FLOAT, 
     dates TEXT, 
-    week_name TEXT, 
-    "Trip_distance" FLOAT
-);
+    week_name TEXT
+)
+
+CREATE TABLE sunrise_sunset (
+    "index" BIGINT, 
+    "DATE" DATETIME, 
+    "Sunrise" TEXT, 
+    "Sunset" TEXT
+)
