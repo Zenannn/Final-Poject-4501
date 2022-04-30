@@ -139,6 +139,3 @@ def plot_visual_1(query_res):
     
 plot_visual_1(query1)
 ```
-We can get following output:
-
-![Output 1](https://github.com/Zenannn/Final-Poject-4501/blob/main/g1.png)
