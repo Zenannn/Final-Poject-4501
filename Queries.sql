@@ -1,13 +1,16 @@
-
+-- query 1
 SELECT COUNT("index"),strftime ('%H',pickup_datetime) hour
 FROM taxi_data
 GROUP BY strftime ('%H',pickup_datetime)
 
+
+-- query 2
 SELECT COUNT("index"),week_name
 FROM uber_data
 GROUP BY week_name
 ORDER BY COUNT("index")
 
+-- query 3
 SELECT "Trip_distance"
 FROM 
 (SELECT "Trip_distance"
@@ -31,7 +34,7 @@ FROM taxi_data
 WHERE strftime ('%Y-%m',pickup_datetime) == '2013-07')    
     ) * 18 / 20 - 1
 
-
+-- query 4
 SELECT a.time, avg(a."Trip_distance"), count(a.time)
 FROM
 (SELECT strftime ('%Y-%m-%d', date) as time, "Trip_distance"
@@ -45,8 +48,8 @@ GROUP BY time
 ORDER BY count(time) DESC
 LIMIT 10
 
+-- query 5
 SELECT b.b_time, b.rides, weather_daily."DailyWindSpeed"
-
 FROM
 (SELECT a.time as b_time, count(a.time) as rides
 FROM
@@ -63,6 +66,7 @@ ON b.b_time = weather_daily."DATE"
 ORDER BY weather_daily."DailyWindSpeed" DESC
 LIMIT 10
 
+-- query 6
 SELECT hour3, count3, pre, wind
 FROM
 (SELECT hour2 as hour3, sum(count2) as count3
