@@ -139,3 +139,8 @@ def plot_visual_1(query_res):
     
 plot_visual_1(query1)
 ```
+
+## Part 5: Bonus
+* We add unit test for func
+* Create a "sunrise-sunset" table and query join with "uber" table
+* Add type hint for func
