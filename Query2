@@ -1,0 +1,5 @@
+
+SELECT COUNT("index"),week_name
+FROM uber_data
+GROUP BY week_name
+ORDER BY COUNT("index")

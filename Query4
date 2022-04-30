@@ -1,0 +1,13 @@
+
+SELECT a.time, avg(a."Trip_distance"), count(a.time)
+FROM
+(SELECT strftime ('%Y-%m-%d', date) as time, "Trip_distance"
+FROM uber_data
+WHERE strftime ('%Y',date) == '2009'
+UNION ALL
+SELECT strftime ('%Y-%m-%d', pickup_datetime) as time, trip_distance
+FROM taxi_data 
+WHERE strftime ('%Y',pickup_datetime) == '2009') as a
+GROUP BY time
+ORDER BY count(time) DESC
+LIMIT 10

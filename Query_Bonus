@@ -1,0 +1,7 @@
+
+SELECT a.time, a.avg_distance,  sunrise_sunset."Sunset" - sunrise_sunset."Sunrise"
+FROM sunrise_sunset
+LEFT JOIN (SELECT strftime ('%Y-%m-%d', uber_data.raw_date) as time, avg(trip_distance) as avg_distance
+FROM uber_data
+GROUP BY strftime ('%Y-%m-%d', uber_data.raw_date)) as a
+ON  strftime ('%Y-%m-%d', sunrise_sunset."DATE") = a.time

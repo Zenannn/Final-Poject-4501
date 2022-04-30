@@ -1,0 +1,23 @@
+
+SELECT "Trip_distance"
+FROM 
+(SELECT "Trip_distance"
+FROM uber_data
+WHERE strftime ('%Y-%m',date) == '2013-07'
+UNION ALL
+SELECT trip_distance
+FROM taxi_data 
+WHERE strftime ('%Y-%m',pickup_datetime) == '2013-07')
+ORDER BY "Trip_distance" ASC
+LIMIT 1
+OFFSET (SELECT
+         COUNT(*)
+        FROM 
+(SELECT "Trip_distance"
+FROM uber_data
+WHERE strftime ('%Y-%m',date) == '2013-07'
+UNION ALL
+SELECT trip_distance
+FROM taxi_data 
+WHERE strftime ('%Y-%m',pickup_datetime) == '2013-07')    
+    ) * 18 / 20 - 1

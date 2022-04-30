@@ -1,0 +1,4 @@
+
+SELECT COUNT("index"),strftime ('%H',pickup_datetime) hour
+FROM taxi_data
+GROUP BY strftime ('%H',pickup_datetime)

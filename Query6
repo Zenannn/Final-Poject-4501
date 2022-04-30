@@ -1,0 +1,31 @@
+
+SELECT hour3, count3, pre, wind
+FROM
+(SELECT hour2 as hour3, sum(count2) as count3
+FROM
+(WITH RECURSIVE dates(x,y) AS ( 
+            SELECT '2012-10-22 00:00' , 0
+                UNION ALL 
+            SELECT DATETIME(x, '+1 HOURS') ,0 FROM dates WHERE x<'2012-11-07 00:00' 
+) 
+SELECT strftime ('%Y-%m-%d-%H',x) as hour2, y as count2 FROM dates 
+UNION
+SELECT hour1, count1
+FROM
+(SELECT a.date as hour1, COUNT(a.distance) as count1
+FROM
+(SELECT strftime ('%Y-%m-%d-%H',raw_date) as date, "Trip_distance" as distance
+FROM uber_data
+WHERE raw_date between '2012-10-22 00:00' and '2012-11-07 00:00'
+UNION ALL
+SELECT strftime ('%Y-%m-%d-%H',pickup_datetime),trip_distance
+FROM taxi_data 
+WHERE pickup_datetime between '2012-10-22 00:00' and '2012-11-07 00:00') as a
+GROUP BY date))
+GROUP BY hour2)
+LEFT JOIN
+(SELECT strftime ('%Y-%m-%d-%H', DATE) as hour, avg("HourlyPrecipitation") as pre, avg("HourlyWindSpeed") as wind
+FROM weather_hourly
+WHERE hour between '2012-10-22' and '2012-11-07'
+GROUP BY hour)
+ON hour3 = hour

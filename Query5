@@ -1,0 +1,18 @@
+
+SELECT b.b_time, b.rides, weather_daily."DailyWindSpeed"
+
+FROM
+(SELECT a.time as b_time, count(a.time) as rides
+FROM
+(SELECT strftime ('%Y-%m-%d', date) as time, "Trip_distance"
+FROM uber_data
+WHERE strftime ('%Y',date) == '2014'
+UNION ALL
+SELECT strftime ('%Y-%m-%d', pickup_datetime) as time, trip_distance
+FROM taxi_data 
+WHERE strftime ('%Y',pickup_datetime) == '2014') as a
+GROUP BY time) as b 
+JOIN weather_daily
+ON b.b_time = weather_daily."DATE"
+ORDER BY weather_daily."DailyWindSpeed" DESC
+LIMIT 10
